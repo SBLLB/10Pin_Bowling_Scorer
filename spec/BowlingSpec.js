@@ -8,9 +8,15 @@ describe('A Bowling', function() {
 			expect(game.framesLeft).toEqual(10);
 		});
 
+		it('a rolling score', function() {
+			game = new Game;
+			expect(game.totalScore).toEqual(0);
+		});
+
 	});
 
 });
+
 
 // describe('frame should have', function() {
 	// 	// Two rolls
