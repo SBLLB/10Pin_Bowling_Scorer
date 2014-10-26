@@ -25,7 +25,12 @@ describe('When playing 10-pin bowling', function() {
 		});
 
 		it('allow two possible rolls', function() {
-			expect(turn.rolls).toEqual(2);
+			expect(turn.rollsAvailable).toEqual(2);
+		});
+
+		it('know which roll is being taken', function() {
+			turn.rollTaken(5)
+			expect(turn.rollsTaken).toEqual(1)
 		});
 
 		it('have ten pins', function() {
@@ -36,10 +41,12 @@ describe('When playing 10-pin bowling', function() {
 			expect(turn.score).toEqual(0);
 		});
 
-		it('add pins hit to the score', function() {
-			turn.pinsHit(5)
+		it('add the number of pins hit to the score', function() {
+			turn.rollTaken(5)
 			expect(turn.score).toEqual(5);
 		});
+
+
 
 
 

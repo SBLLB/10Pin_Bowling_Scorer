@@ -1,15 +1,28 @@
 Game = function() {
 	this.turnsLeft = 10;
 	this.totalScore = 0;
+
+	// Bonus? Applicable
 };
 
 
 Turn = function() {
-	this.rolls = 2;
+	this.rollsAvailable = 2;
+	this.rollsTaken = 0 
 	this.pins = 10;
 	this.score = 0;
+
 }; 
 
-Turn.prototype.pinsHit = function(pinsKnockedDown) {
+
+Turn.prototype.rollTaken = function(pinsKnockedDown) {
+	this._pinsHit(pinsKnockedDown);
+	this.rollsTaken += 1
+
+};
+
+// PRIVATE
+
+Turn.prototype._pinsHit = function(pinsKnockedDown) {
 	this.score += pinsKnockedDown;	
 };
