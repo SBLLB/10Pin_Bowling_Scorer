@@ -18,22 +18,31 @@ describe('When playing 10-pin bowling', function() {
 	});
 
 
-	describe('each turn should have', function() {
+	describe('each turn/frame should', function() {
 
 		beforeEach(function() {
 			turn = new Turn;
 		});
 
-		it('two possible rolls', function() {
+		it('allow two possible rolls', function() {
 			expect(turn.rolls).toEqual(2);
 		});
 
-		it('ten pins', function() {
+		it('have ten pins', function() {
 			expect(turn.pins).toEqual(10);
 		});
 
-		// Two rolls
-		// 	// Ten pins
+		it('keep a turn/frame score', function() {
+			expect(turn.score).toEqual(0);
+		});
+
+		it('add pins hit to the score', function() {
+			turn.pinsHit(5)
+			expect(turn.score).toEqual(5);
+		});
+
+
+
 		// 	// Pins from first roll remain for second roll
 		// 	// If a strike, second go not required
 			
