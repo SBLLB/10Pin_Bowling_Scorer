@@ -1,19 +1,24 @@
 
 describe('When playing 10-pin bowling', function() {
 
-	describe('a game should have', function() {
+	describe('a game should', function() {
 
 		beforeEach(function() {
 		game = new Game;
 		});
 		
-		it('10 frames', function() {
+		it('have 10 frames', function() {
 			expect(game.turnsLeft).toEqual(10);
 		});
 
-		it('an accumulating score', function() {
+		it('have an accumulating score', function() {
 			expect(game.totalScore).toEqual(0);
 		});
+
+		it('know when you are playing the tenth frame', function() {
+			game.turnsLeft = 0
+			expect(game.isTenthFrame()).toEqual(true)
+		})
 
 	});
 
@@ -38,7 +43,6 @@ describe('When playing 10-pin bowling', function() {
 			turn.bowlTwo(2);
 			expect(turn.bowlsMade).toEqual(2);
 		});
-
 
 		it('have ten pins', function() {
 			expect(turn.pins).toEqual(10);
@@ -69,11 +73,10 @@ describe('When playing 10-pin bowling', function() {
 			expect(turn.pins).toEqual(1)
 		});
 
-
-
-
-		// 	// Pins from first roll remain for second roll
-		// 	// If a strike, second go not required
+		it('not allow a second roll if first is a strike', function() {
+			turn.bowlOne(10)
+			expect(turn.bowlTwo()).toBe(undefined)
+		});
 			
 	});
 

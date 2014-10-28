@@ -5,6 +5,10 @@ Game = function() {
 	// Bonus? Applicable
 };
 
+Game.prototype.isTenthFrame = function() {
+	return (this.turnsLeft === 0)	
+};
+
 
 Turn = function() {
 	this.rollsAvailable = 2;
@@ -22,6 +26,9 @@ Turn.prototype.bowlOne = function(pinsKnockedDown) {
 };
 
 Turn.prototype.bowlTwo = function(pinsKnockedDown) {
+	if (this.isStrike()) {
+		return 
+	}
 	this._pinsHit(pinsKnockedDown);
 	this.bowlsMade += 1
 
