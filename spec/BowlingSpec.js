@@ -1,7 +1,7 @@
 
-describe('When playing 10-pin bowling', function() {
+describe('A 10-pin bowling', function() {
 
-	describe('a game should', function() {
+	describe('game should', function() {
 
 		beforeEach(function() {
 		game = new Game;
@@ -23,7 +23,7 @@ describe('When playing 10-pin bowling', function() {
 	});
 
 
-	describe('each turn/frame should', function() {
+	describe('turn/frame should', function() {
 
 		beforeEach(function() {
 			turn = new Turn;
@@ -59,13 +59,13 @@ describe('When playing 10-pin bowling', function() {
 
 		it('know when there has been a strike', function() {
 			turn.bowlOne(10)
-			expect(turn.isStrike()).toBe(true)
+			expect(turn._isStrike()).toBe(true)
 		});
 
 		it('know when there has been a spare', function() {
 			turn.bowlOne(9)
 			turn.bowlTwo(1)
-			expect(turn.isSpare()).toBe(true)
+			expect(turn._isSpare()).toBe(true)
 		});
 
 		it('reset standing pins only after first roll', function() {
@@ -79,6 +79,34 @@ describe('When playing 10-pin bowling', function() {
 		});
 			
 	});
+
+	describe('should keep score of', function() {
+
+		beforeEach(function() {
+			turn = new Turn;
+		});
+
+		it('the first bowl of a frame', function() {
+			turn.bowlOne(6)
+			turn.bowlTwo(2)
+			expect(turn._bowlOneScore()).toEqual(6)
+		});
+
+		it('the first bowl of a frame', function() {
+			turn.bowlOne(6)
+			turn.bowlTwo(2)
+			expect(turn._bowlTwoScore()).toEqual(2)
+		});
+
+		it('the total score of a frame', function() {
+			turn.bowlOne(6)
+			turn.bowlTwo(2)
+			expect(turn.score).toEqual(8)
+		});
+
+
+	});
+
 
 });
 
