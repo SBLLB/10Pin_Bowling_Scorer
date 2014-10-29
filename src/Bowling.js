@@ -1,13 +1,8 @@
 Game = function() {
 	this.turnsLeft = 10;
 	this.totalScore = 0;
-	this.frameScores = [
-	// [1, 5],
-	// [4, 7],	
-	]
-// game.frameScores.push({roll1: 3, roll2: 3})
-	
-	this.frameBonusScores = {}
+	this.frameScores = [];
+	this.strikeSpareTracker = [];
 
 };
 
@@ -15,8 +10,9 @@ Game.prototype.isTenthFrame = function() {
 	return (this.turnsLeft === 0)	
 };
 
+// is last frame? if framesScores[9] = 10 
 
-Turn = function(game) {
+Turn = function() {
 	this.rollsAvailable = 2;
 	this.bowlsMade = 0 
 	this.pins = 10;
@@ -40,6 +36,12 @@ Turn.prototype.bowlTwo = function(pinsKnockedDown) {
 
 Turn.prototype.recordScore = function() {
 	this.game.frameScores.push(this.scoreByBowl)
+	if (this.score === 10 && this.scoreByBowl[0] === 10) {
+		this.game.strikeSpareTracker.push("Strike")
+	}
+	else if (this._isSpare) {
+		this.game.strikeSpareTracker.push("Spare")
+	}
 };
 
 

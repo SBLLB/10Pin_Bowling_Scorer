@@ -1,11 +1,12 @@
 
 describe('A 10-pin bowling', function() {
 
-	describe('game should', function() {
-
-		beforeEach(function() {
-		game = new Game;
+	beforeEach(function() {
+			game = new Game;
+			turn = new Turn(game);
 		});
+
+	describe('game should', function() {
 		
 		it('have 10 frames', function() {
 			expect(game.turnsLeft).toEqual(10);
@@ -18,21 +19,18 @@ describe('A 10-pin bowling', function() {
 		it('know when you are playing the tenth frame', function() {
 			game.turnsLeft = 0
 			expect(game.isTenthFrame()).toEqual(true)
-		})
+		});
 
-		xit('keep score of each frame', function() {
-			game.takeTurn
+		it('keep score of strikes and spares', function() {
+			turn.bowlOne(10)
+			turn.recordScore()
+			expect(game.strikeSpareTracker[0]).toEqual('Strike')
 		});
 
 	});
 
 
 	describe('turn/frame should', function() {
-
-		beforeEach(function() {
-			game = new Game
-			turn = new Turn(game);
-		});
 
 		it('allow two possible rolls', function() {
 			expect(turn.rollsAvailable).toEqual(2);
@@ -83,6 +81,12 @@ describe('A 10-pin bowling', function() {
 			turn.bowlTwo()
 			expect(turn.scoreByBowl).toEqual([10, 0])
 		});
+
+		it('not get confused between a spare and strike', function() {
+			turn.bowlOne(1)
+			turn.bowlTwo(9)
+			expect(turn._isStrike()).toBe(false)
+		});
 			
 
 		it('the first bowl of a frame', function() {
@@ -112,7 +116,6 @@ describe('A 10-pin bowling', function() {
 
 
 	});
-
 
 });
 
