@@ -20,13 +20,18 @@ describe('A 10-pin bowling', function() {
 			expect(game.isTenthFrame()).toEqual(true)
 		})
 
+		xit('keep score of each frame', function() {
+			game.takeTurn
+		});
+
 	});
 
 
 	describe('turn/frame should', function() {
 
 		beforeEach(function() {
-			turn = new Turn;
+			game = new Game
+			turn = new Turn(game);
 		});
 
 		it('allow two possible rolls', function() {
@@ -75,16 +80,10 @@ describe('A 10-pin bowling', function() {
 
 		it('not allow a second roll if first is a strike', function() {
 			turn.bowlOne(10)
-			expect(turn.bowlTwo()).toBe(undefined)
+			turn.bowlTwo()
+			expect(turn.scoreByBowl).toEqual([10, 0])
 		});
 			
-	});
-
-	describe('should keep score of', function() {
-
-		beforeEach(function() {
-			turn = new Turn;
-		});
 
 		it('the first bowl of a frame', function() {
 			turn.bowlOne(6)
@@ -102,6 +101,13 @@ describe('A 10-pin bowling', function() {
 			turn.bowlOne(6)
 			turn.bowlTwo(2)
 			expect(turn.score).toEqual(8)
+		});
+
+		it('append frame scores to game tally', function(){
+			turn.bowlOne(6)
+			turn.bowlTwo(2)
+			turn.recordScore()
+			expect(game.frameScores).toContain([6, 2])
 		});
 
 

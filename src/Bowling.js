@@ -1,9 +1,14 @@
 Game = function() {
 	this.turnsLeft = 10;
 	this.totalScore = 0;
-	this.frameScores = {}
+	this.frameScores = [
+	// [1, 5],
+	// [4, 7],	
+	]
+// game.frameScores.push({roll1: 3, roll2: 3})
+	
+	this.frameBonusScores = {}
 
-	// Bonus? Applicable
 };
 
 Game.prototype.isTenthFrame = function() {
@@ -11,13 +16,13 @@ Game.prototype.isTenthFrame = function() {
 };
 
 
-Turn = function() {
+Turn = function(game) {
 	this.rollsAvailable = 2;
 	this.bowlsMade = 0 
 	this.pins = 10;
 	this.score = 0;
 	this.scoreByBowl = [];
-
+	this.game = game;
 }; 
 
 Turn.prototype.bowlOne = function(pinsKnockedDown) {
@@ -27,11 +32,16 @@ Turn.prototype.bowlOne = function(pinsKnockedDown) {
 
 Turn.prototype.bowlTwo = function(pinsKnockedDown) {
 	if (this._isStrike()) {
-		return undefined
+		this.scoreByBowl.push(0)
 	}
 	this._pinsHit(pinsKnockedDown);
 	this.bowlsMade += 1
 };
+
+Turn.prototype.recordScore = function() {
+	this.game.frameScores.push(this.scoreByBowl)
+};
+
 
 // PRIVATE
 
@@ -52,10 +62,14 @@ Turn.prototype._pinsHit = function(pinsKnockedDown) {
 	this.pins -= pinsKnockedDown;
 };
 
-Turn.prototype._bowlOneScore = function(first_argument) {
+Turn.prototype._bowlOneScore = function() {
 	return this.scoreByBowl[0]
 };
 
-Turn.prototype._bowlTwoScore = function(first_argument) {
+Turn.prototype._bowlTwoScore = function() {
 	return this.scoreByBowl[1]
 };
+
+
+
+
