@@ -10,43 +10,37 @@ Game.prototype.isTenthFrame = function() {
 	return (this.turnsLeft === 0)	
 };
 
-// is last frame? if framesScores[9] = 10 
-
 Turn = function() {
-	this.rollsAvailable = 2;
 	this.bowlsMade = 0 
-	this.pins = 10;
+	this.pinsStanding = 10;
 	this.score = 0;
 	this.scoreByBowl = [];
 	this.game = game;
 }; 
 
-Turn.prototype.bowlOne = function(pinsKnockedDown) {
-	this._pinsHit(pinsKnockedDown);
+Turn.prototype.bowlOne = function(pinsDown) {
+	this._scorePinsHit(pinsDown);
 	this.bowlsMade += 1
 };
 
-Turn.prototype.bowlTwo = function(pinsKnockedDown) {
-	if (this._StrikeOrSpare() === "strike") {
+Turn.prototype.bowlTwo = function(pinsDown) {
+	if (this._bonus() === "strike") {
 		this.scoreByBowl.push(0)
 	}
-	this._pinsHit(pinsKnockedDown);
+	this._scorePinsHit(pinsDown);
 	this.bowlsMade += 1
 };
 
 Turn.prototype.recordScore = function() {
 	this.game.frameScores.push(this.scoreByBowl)
-	this.game.strikeSpareTracker.push(this._StrikeOrSpare())
+	this.game.strikeSpareTracker.push(this._bonus())
 };
 
 
 // PRIVATE
 
-Turn.prototype._isBonus = function() {
-	return (this.score === 10);
-};
 
-Turn.prototype._StrikeOrSpare = function() {
+Turn.prototype._bonus = function() {
 	if (this.score === 10) {
 		if (this.scoreByBowl[0] === 10) {
 		return "strike" 
@@ -56,23 +50,14 @@ Turn.prototype._StrikeOrSpare = function() {
 	else return "no bonus" 
 };
 
-// Turn.prototype._isStrike = function() {
-// 	return (this._StrikeOrSpare === "strike")
-// };
 
-// Turn.prototype._isSpare = function() {
-// 	return (this._StrikeOrSpare === "spare")
-// };
-
-
-
-Turn.prototype._pinsHit = function(pinsKnockedDown) {
+Turn.prototype._scorePinsHit = function(pinsDown) {
 	if (this.scoreByBowl.length >= 2) {
 		return undefined
 	}
-	this.score += pinsKnockedDown;	
-	this.scoreByBowl.push(pinsKnockedDown)
-	this.pins -= pinsKnockedDown;
+	this.score += pinsDown;	
+	this.scoreByBowl.push(pinsDown)
+	this.pinsStanding -= pinsDown;
 };
 
 Turn.prototype._bowlOneScore = function() {

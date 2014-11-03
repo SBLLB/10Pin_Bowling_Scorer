@@ -32,15 +32,17 @@ describe('A 10-pin bowling', function() {
 			turn.recordScore()
 			expect(game.strikeSpareTracker[0]).toEqual('spare')
 		});
+		it('know when a frame yeilded no strike or spare', function() {
+			turn.bowlOne(1)
+			turn.bowlTwo(3)
+			turn.recordScore()
+			expect(game.strikeSpareTracker[0]).toEqual('no bonus')
+		});
 
 	});
 
 
 	describe('turn/frame should', function() {
-
-		it('allow two possible rolls', function() {
-			expect(turn.rollsAvailable).toEqual(2);
-		});
 
 		it('know when one roll has been taken', function() {
 			turn.bowlOne(5);
@@ -54,7 +56,7 @@ describe('A 10-pin bowling', function() {
 		});
 
 		it('have ten pins', function() {
-			expect(turn.pins).toEqual(10);
+			expect(turn.pinsStanding).toEqual(10);
 		});
 
 		it('keep a turn/frame score', function() {
@@ -68,18 +70,18 @@ describe('A 10-pin bowling', function() {
 
 		it('know when there has been a strike', function() {
 			turn.bowlOne(10)
-			expect(turn._StrikeOrSpare()).toEqual("strike")
+			expect(turn._bonus()).toEqual("strike")
 		});
 
 		it('know when there has been a spare', function() {
 			turn.bowlOne(9)
 			turn.bowlTwo(1)
-			expect(turn._StrikeOrSpare()).toEqual("spare")
+			expect(turn._bonus()).toEqual("spare")
 		});
 
 		it('reset standing pins only after first roll', function() {
 			turn.bowlOne(9)
-			expect(turn.pins).toEqual(1)
+			expect(turn.pinsStanding).toEqual(1)
 		});
 
 		it('not allow a second roll if first is a strike', function() {
@@ -91,7 +93,7 @@ describe('A 10-pin bowling', function() {
 		it('not get confused between a spare and strike', function() {
 			turn.bowlOne(1)
 			turn.bowlTwo(9)
-			expect(turn._StrikeOrSpare()).toEqual("spare")
+			expect(turn._bonus()).toEqual("spare")
 		});
 			
 
