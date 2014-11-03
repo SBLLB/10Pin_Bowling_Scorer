@@ -26,17 +26,30 @@ describe('A 10-pin bowling', function() {
 			turn.recordScore()
 			expect(game.strikeSpareTracker[0]).toEqual('strike')
 		});
+
 		it('keep score of spares', function() {
 			turn.bowlOne(1)
 			turn.bowlTwo(9)
 			turn.recordScore()
 			expect(game.strikeSpareTracker[0]).toEqual('spare')
 		});
+
 		it('know when a frame yeilded no strike or spare', function() {
 			turn.bowlOne(1)
 			turn.bowlTwo(3)
 			turn.recordScore()
 			expect(game.strikeSpareTracker[0]).toEqual('no bonus')
+		});
+
+		xit('award a bonus of double the next frame if a strike', function() {
+			expect(game.bonusPointsByFrame[0]).toEqual(10)
+		});
+
+		it('keep a running total score including the bonus points', function() {
+			game.frameScores = [[10, 0], [5, 3], [2, 1]]
+			game._calculateTotalScore()
+			// this.bonusPointsByFrame = [8, 0, 0]
+			expect(game.totalScore).toEqual(21)
 		});
 
 	});
@@ -126,6 +139,7 @@ describe('A 10-pin bowling', function() {
 	});
 
 });
+
 
 
 

@@ -2,13 +2,37 @@ Game = function() {
 	this.turnsLeft = 10;
 	this.totalScore = 0;
 	this.frameScores = [];
+	this.bonusPointsByFrame = [];
 	this.strikeSpareTracker = [];
-
 };
 
 Game.prototype.isTenthFrame = function() {
 	return (this.turnsLeft === 0)	
 };
+
+Game.prototype._calculateTotalScore = function() {
+	var flattened = this.frameScores.reduce(function(a, b) {
+		return a.concat(b)
+	});
+	this.totalScore = flattened.reduce(function(a, b) {
+		return a + b
+	});
+};
+
+// var flattened_scores = function() {
+// 		scores.reduce(function(a, b) {
+// 			return a.concat(b)
+// 		};
+// 	};
+
+// Game.prototype.calculateTotalScore = function(scores) {
+	
+// 	flattened_scores.reduce(function() {
+// 		return a + b
+// 	}
+// 	};
+// };
+
 
 Turn = function() {
 	this.bowlsMade = 0 
