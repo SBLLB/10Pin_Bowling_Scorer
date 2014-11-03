@@ -27,7 +27,7 @@ Turn.prototype.bowlOne = function(pinsKnockedDown) {
 };
 
 Turn.prototype.bowlTwo = function(pinsKnockedDown) {
-	if (this._isStrike()) {
+	if (this._StrikeOrSpare() === "strike") {
 		this.scoreByBowl.push(0)
 	}
 	this._pinsHit(pinsKnockedDown);
@@ -36,24 +36,35 @@ Turn.prototype.bowlTwo = function(pinsKnockedDown) {
 
 Turn.prototype.recordScore = function() {
 	this.game.frameScores.push(this.scoreByBowl)
-	if (this.score === 10 && this.scoreByBowl[0] === 10) {
-		this.game.strikeSpareTracker.push("Strike")
-	}
-	else if (this._isSpare) {
-		this.game.strikeSpareTracker.push("Spare")
-	}
+	this.game.strikeSpareTracker.push(this._StrikeOrSpare())
 };
 
 
 // PRIVATE
 
-Turn.prototype._isStrike = function() {
-	return (this.bowlsMade === 1 && this.score === 10);
+Turn.prototype._isBonus = function() {
+	return (this.score === 10);
 };
 
-Turn.prototype._isSpare = function() {
-	return (this.bowlsMade === 2 && this.score === 10);
+Turn.prototype._StrikeOrSpare = function() {
+	if (this.score === 10) {
+		if (this.scoreByBowl[0] === 10) {
+		return "strike" 
+		}
+		else return "spare"
+	}
+	else return "no bonus" 
 };
+
+// Turn.prototype._isStrike = function() {
+// 	return (this._StrikeOrSpare === "strike")
+// };
+
+// Turn.prototype._isSpare = function() {
+// 	return (this._StrikeOrSpare === "spare")
+// };
+
+
 
 Turn.prototype._pinsHit = function(pinsKnockedDown) {
 	if (this.scoreByBowl.length >= 2) {

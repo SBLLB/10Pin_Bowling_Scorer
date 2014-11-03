@@ -21,10 +21,16 @@ describe('A 10-pin bowling', function() {
 			expect(game.isTenthFrame()).toEqual(true)
 		});
 
-		it('keep score of strikes and spares', function() {
+		it('keep score of strikes', function() {
 			turn.bowlOne(10)
 			turn.recordScore()
-			expect(game.strikeSpareTracker[0]).toEqual('Strike')
+			expect(game.strikeSpareTracker[0]).toEqual('strike')
+		});
+		it('keep score of spares', function() {
+			turn.bowlOne(1)
+			turn.bowlTwo(9)
+			turn.recordScore()
+			expect(game.strikeSpareTracker[0]).toEqual('spare')
 		});
 
 	});
@@ -62,13 +68,13 @@ describe('A 10-pin bowling', function() {
 
 		it('know when there has been a strike', function() {
 			turn.bowlOne(10)
-			expect(turn._isStrike()).toBe(true)
+			expect(turn._StrikeOrSpare()).toEqual("strike")
 		});
 
 		it('know when there has been a spare', function() {
 			turn.bowlOne(9)
 			turn.bowlTwo(1)
-			expect(turn._isSpare()).toBe(true)
+			expect(turn._StrikeOrSpare()).toEqual("spare")
 		});
 
 		it('reset standing pins only after first roll', function() {
@@ -85,7 +91,7 @@ describe('A 10-pin bowling', function() {
 		it('not get confused between a spare and strike', function() {
 			turn.bowlOne(1)
 			turn.bowlTwo(9)
-			expect(turn._isStrike()).toBe(false)
+			expect(turn._StrikeOrSpare()).toEqual("spare")
 		});
 			
 
