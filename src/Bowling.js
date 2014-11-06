@@ -4,6 +4,9 @@ Game = function() {
 	this.frameScores = [];
 	this.bonusPointsByFrame = [];
 	this.strikeSpareTracker = [];
+	this.flattenedFrameScore =[];
+	this.totalFrameScore = 0;
+	this.totalBonusScore = 0;
 };
 
 Game.prototype.isTenthFrame = function() {
@@ -11,12 +14,19 @@ Game.prototype.isTenthFrame = function() {
 };
 
 Game.prototype._calculateTotalScore = function() {
-	var flattened = this.frameScores.reduce(function(a, b) {
+	this.flattenedFrameScore = this.frameScores.reduce(function(a, b) {
 		return a.concat(b)
 	});
-	this.totalScore = flattened.reduce(function(a, b) {
+
+	this.totalFrameScore = this.flattenedFrameScore.reduce(function(a, b) {
 		return a + b
 	});
+
+	this.totalBonusScore = this.bonusPointsByFrame.reduce(function(a, b) {
+		return a + b
+	});
+
+ 	this.totalScore = this.totalFrameScore + this.totalBonusScore
 };
 
 Game.prototype._awardBonusPoints = function() {

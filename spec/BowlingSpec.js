@@ -56,16 +56,17 @@ describe('A 10-pin bowling', function() {
 		});
 
 		it('keep a running total score', function() {
-			game.frameScores = [[10, 0], [5, 3], [2, 1]]
+			game.frameScores = [[2, 0], [5, 3], [2, 1]]
+			game.bonusPointsByFrame = [0, 0, 0]
 			game._calculateTotalScore()
-			expect(game.totalScore).toEqual(21)
+			expect(game.totalScore).toEqual(13)
 		});
 		
 		it('keep a running total score including the bonus points', function() {
 			game.frameScores = [[10, 0], [5, 3], [2, 1]]
+			game.bonusPointsByFrame = [16, 0, 0]
 			game._calculateTotalScore()
-			this.bonusPointsByFrame = [8, 0, 0]
-			expect(game.totalScore).toEqual(21)
+			expect(game.totalScore).toEqual(37)
 		});
 
 	});
