@@ -41,14 +41,23 @@ describe('A 10-pin bowling', function() {
 			expect(game.strikeSpareTracker[0]).toEqual('no bonus')
 		});
 
-		xit('award a bonus of double the next frame if a strike', function() {
+		it('award a bonus of double the next bowl if a spare', function() {
+			game.frameScores = [[2, 8], [5, 3]];
+			game.strikeSpareTracker = ["spare", "no bonus"];
+			game._awardBonusPoints()
 			expect(game.bonusPointsByFrame[0]).toEqual(10)
 		});
 
-		it('keep a running total score including the bonus points', function() {
+		it('keep a running total score', function() {
 			game.frameScores = [[10, 0], [5, 3], [2, 1]]
 			game._calculateTotalScore()
-			// this.bonusPointsByFrame = [8, 0, 0]
+			expect(game.totalScore).toEqual(21)
+		});
+		
+		xit('keep a running total score including the bonus points', function() {
+			game.frameScores = [[10, 0], [5, 3], [2, 1]]
+			game._calculateTotalScore()
+			this.bonusPointsByFrame = [8, 0, 0]
 			expect(game.totalScore).toEqual(21)
 		});
 

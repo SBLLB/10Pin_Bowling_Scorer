@@ -19,6 +19,22 @@ Game.prototype._calculateTotalScore = function() {
 	});
 };
 
+Game.prototype._awardBonusPoints = function() {
+	var index;
+	var a = this.strikeSpareTracker;
+	for (index = 0; index < a.length; ++index) {
+    	if ((a[index]) === "no bonus") {
+    		this.bonusPointsByFrame.push(0)
+    	}
+    	if ((a[index]) === "spare") {
+    		this.bonusPointsByFrame.push(((this.frameScores[(index+1)][0])*2))
+    	}
+    	// if ((a[index]) === "strike") {
+    	// 	this.bonusPointsByFrame.push((this.frameScores[(index+1)][0])+(this.frameScores[(index+1)][1])*2)
+    	// };
+	};
+};
+
 // var flattened_scores = function() {
 // 		scores.reduce(function(a, b) {
 // 			return a.concat(b)
