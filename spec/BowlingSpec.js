@@ -48,13 +48,20 @@ describe('A 10-pin bowling', function() {
 			expect(game.bonusPointsByFrame[0]).toEqual(10)
 		});
 
+		it('award a bonus of double the next frame if a strike', function() {
+			game.frameScores = [[10, 0], [5, 3]];
+			game.strikeSpareTracker = ["strike", "no bonus"];
+			game._awardBonusPoints()
+			expect(game.bonusPointsByFrame[0]).toEqual(16)
+		});
+
 		it('keep a running total score', function() {
 			game.frameScores = [[10, 0], [5, 3], [2, 1]]
 			game._calculateTotalScore()
 			expect(game.totalScore).toEqual(21)
 		});
 		
-		xit('keep a running total score including the bonus points', function() {
+		it('keep a running total score including the bonus points', function() {
 			game.frameScores = [[10, 0], [5, 3], [2, 1]]
 			game._calculateTotalScore()
 			this.bonusPointsByFrame = [8, 0, 0]

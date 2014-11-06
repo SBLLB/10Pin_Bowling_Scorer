@@ -29,9 +29,9 @@ Game.prototype._awardBonusPoints = function() {
     	if ((a[index]) === "spare") {
     		this.bonusPointsByFrame.push(((this.frameScores[(index+1)][0])*2))
     	}
-    	// if ((a[index]) === "strike") {
-    	// 	this.bonusPointsByFrame.push((this.frameScores[(index+1)][0])+(this.frameScores[(index+1)][1])*2)
-    	// };
+    	if ((a[index]) === "strike") {
+    		this.bonusPointsByFrame.push(((this.frameScores[(index+1)][0])+(this.frameScores[(index+1)][1]))*2)
+    	};
 	};
 };
 
