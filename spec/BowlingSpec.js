@@ -13,12 +13,12 @@ describe('A 10-pin bowling', function() {
 		});
 
 		it('have an accumulating score', function() {
-			expect(game.totalScore).toEqual(0);
+			expect(game.totalGameScore).toEqual(0);
 		});
 
 		it('know when you are playing the tenth frame', function() {
 			game.turnsLeft = 0
-			expect(game.isTenthFrame()).toEqual(true)
+			expect(game._isTenthFrame()).toEqual(true)
 		});
 
 		it('keep score of strikes', function() {
@@ -59,14 +59,14 @@ describe('A 10-pin bowling', function() {
 			game.frameScores = [[2, 0], [5, 3], [2, 1]]
 			game.bonusPointsByFrame = [0, 0, 0]
 			game._calculateTotalScore()
-			expect(game.totalScore).toEqual(13)
+			expect(game.totalGameScore).toEqual(13)
 		});
 		
 		it('keep a running total score including the bonus points', function() {
 			game.frameScores = [[10, 0], [5, 3], [2, 1]]
 			game.bonusPointsByFrame = [16, 0, 0]
 			game._calculateTotalScore()
-			expect(game.totalScore).toEqual(37)
+			expect(game.totalGameScore).toEqual(37)
 		});
 
 	});
@@ -130,13 +130,13 @@ describe('A 10-pin bowling', function() {
 		it('the first bowl of a frame', function() {
 			turn.bowlOne(6)
 			turn.bowlTwo(2)
-			expect(turn._bowlOneScore()).toEqual(6)
+			expect(turn.scoreByBowl[0]).toEqual(6)
 		});
 
-		it('the first bowl of a frame', function() {
+		it('the second bowl of a frame', function() {
 			turn.bowlOne(6)
 			turn.bowlTwo(2)
-			expect(turn._bowlTwoScore()).toEqual(2)
+			expect(turn.scoreByBowl[1]).toEqual(2)
 		});
 
 		it('the total score of a frame', function() {
@@ -159,13 +159,3 @@ describe('A 10-pin bowling', function() {
 
 
 
-
-	// describe('scoring', function() {
-	// 	// Score per frame
-	// 	// Rolling score
-	// 	// Strikes
-	// 	// Spares
-	// 	// Gutter Game test
-	// 	// Perfect game test
-	// 	// 10th frame nuances
-	// });
