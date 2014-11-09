@@ -17,7 +17,7 @@ describe('A 10-pin bowling', function() {
 		});
 
 		it('know when you are playing the tenth frame', function() {
-			game.turnsLeft = 0
+			game.frameScores = [[1,2], [4,5], [2,4], [10,0], [2,5], [3.6], [3,3], [2,2], [1,8]]
 			expect(game._isTenthFrame()).toEqual(true)
 		});
 
@@ -58,14 +58,14 @@ describe('A 10-pin bowling', function() {
 		it('keep a running total score', function() {
 			game.frameScores = [[2, 0], [5, 3], [2, 1]]
 			game.bonusPointsByFrame = [0, 0, 0]
-			game._calculateTotalScore()
+			game.calculateTotalScore()
 			expect(game.totalGameScore).toEqual(13)
 		});
 		
 		it('keep a running total score including the bonus points', function() {
 			game.frameScores = [[10, 0], [5, 3], [2, 1]]
 			game.bonusPointsByFrame = [16, 0, 0]
-			game._calculateTotalScore()
+			game.calculateTotalScore()
 			expect(game.totalGameScore).toEqual(37)
 		});
 
@@ -76,13 +76,13 @@ describe('A 10-pin bowling', function() {
 
 		it('know when one roll has been taken', function() {
 			turn.bowlOne(5);
-			expect(turn.bowlsMade).toEqual(1);
+			expect(turn.scoreByBowl.length).toEqual(1);
 		});
 
 		it('know when both rolls have been taken', function() {
 			turn.bowlOne(2);
 			turn.bowlTwo(2);
-			expect(turn.bowlsMade).toEqual(2);
+			expect(turn.scoreByBowl.length).toEqual(2);
 		});
 
 		it('have ten pins', function() {
@@ -90,12 +90,12 @@ describe('A 10-pin bowling', function() {
 		});
 
 		it('keep a turn/frame score', function() {
-			expect(turn.score).toEqual(0);
+			expect(turn.scoreByBowl).toEqual([]);
 		});
 
 		it('add the number of pins hit in first bowl to the score', function() {
 			turn.bowlOne(5)
-			expect(turn.score).toEqual(5);
+			expect(turn.scoreByBowl).toEqual([5]);
 		});
 
 		it('know when there has been a strike', function() {
@@ -142,7 +142,7 @@ describe('A 10-pin bowling', function() {
 		it('the total score of a frame', function() {
 			turn.bowlOne(6)
 			turn.bowlTwo(2)
-			expect(turn.score).toEqual(8)
+			expect(turn.scoreByBowl).toEqual([6,2])
 		});
 
 		it('append frame scores to game tally', function(){

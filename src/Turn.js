@@ -1,6 +1,5 @@
 
 Turn = function() {
-	this.bowlsMade = 0 
 	this.pinsStanding = 10;
 	this.score = 0;
 	this.scoreByBowl = [];
@@ -13,9 +12,6 @@ Turn.prototype.bowlOne = function(pinsDown) {
 };
 
 Turn.prototype.bowlTwo = function(pinsDown) {
-	if (this._isStrike()) {
-		this.scoreByBowl.push(0)
-	}
 	this._scorePinsHit(pinsDown);
 	this.bowlsMade += 1
 };
@@ -40,7 +36,7 @@ Turn.prototype._bonus = function() {
 };
 
 Turn.prototype._isStrikeOrSpare = function() {
-	return (this.score === 10)
+	return (this.score  === 10)
 };
 
 Turn.prototype._isStrike = function() {
@@ -48,6 +44,9 @@ Turn.prototype._isStrike = function() {
 };
 
 Turn.prototype._scorePinsHit = function(pinsDown) {
+	if (this._isStrike()) {
+		this.scoreByBowl.push(0)
+	}
 	if (this._noMoreBowlsAllowed()) {
 		return undefined
 	}
