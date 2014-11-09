@@ -21,7 +21,7 @@ describe('A turn in a 10-pin bowling game', function() {
 
 	});	
 
-	describe('has two bowls per frame/turn.', function() {
+	describe('has two standard bowls per frame/turn.', function() {
 
 
 		it('it should know when one bowl has been taken', function() {

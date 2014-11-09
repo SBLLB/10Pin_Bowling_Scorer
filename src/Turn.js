@@ -8,13 +8,20 @@ Turn = function() {
 
 Turn.prototype.bowlOne = function(pinsDown) {
 	this._scorePinsHit(pinsDown);
-	this.bowlsMade += 1
 };
 
 Turn.prototype.bowlTwo = function(pinsDown) {
 	this._scorePinsHit(pinsDown);
-	this.bowlsMade += 1
 };
+
+Turn.prototype.bonusBowlOne = function(pinsDown) {
+	this._scorePinsHit(pinsDown);
+};
+
+// Turn.prototype.bonusBowlTwo = function(pinsDown) {
+// 	this._scorePinsHit(pinsDown);
+// };
+
 
 Turn.prototype.recordScore = function() {
 	this.game.frameScores.push(this.scoreByBowl)
@@ -58,5 +65,9 @@ Turn.prototype._scorePinsHit = function(pinsDown) {
 
 Turn.prototype._noMoreBowlsAllowed = function() {
 	return (this.scoreByBowl.length >= 2)
+};
+
+Turn.prototype._isBonusBowlAllowed = function() {
+	return false
 };
 
