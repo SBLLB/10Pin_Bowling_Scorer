@@ -1,157 +1,50 @@
 
-describe('A 10-pin bowling', function() {
+describe('A 10-pin bowling game', function() {
 
 	beforeEach(function() {
 			game = new Game;
 			turn = new Turn(game);
 		});
 
-	describe('game should', function() {
+	describe('should be initialised with', function() {
 		
-		it('have 10 frames', function() {
+		it('10 frames', function() {
 			expect(game.turnsLeft).toEqual(10);
 		});
 
-		it('have an accumulating score', function() {
+		it('an accumulating score', function() {
 			expect(game.totalGameScore).toEqual(0);
 		});
 
-		it('know when you are playing the tenth frame', function() {
+	});
+
+	describe('should know when', function() {
+
+
+		it('you are playing the tenth frame', function() {
 			game.frameScores = [[1,2], [4,5], [2,4], [10,0], [2,5], [3.6], [3,3], [2,2], [1,8]]
 			expect(game._isTenthFrame()).toEqual(true)
 		});
 
-		it('keep score of strikes', function() {
+		it('a frame yielded a strike', function() {
 			turn.bowlOne(10)
 			turn.recordScore()
 			expect(game.strikeSpareTracker[0]).toEqual('strike')
 		});
 
-		it('keep score of spares', function() {
+		it('a frame yielded a spare', function() {
 			turn.bowlOne(1)
 			turn.bowlTwo(9)
 			turn.recordScore()
 			expect(game.strikeSpareTracker[0]).toEqual('spare')
 		});
 
-		it('know when a frame yeilded no strike or spare', function() {
+		it('a frame yeilded no strike or spare', function() {
 			turn.bowlOne(1)
 			turn.bowlTwo(3)
 			turn.recordScore()
 			expect(game.strikeSpareTracker[0]).toEqual('no bonus')
 		});
-
-		it('award a bonus of double the next bowl if a spare', function() {
-			game.frameScores = [[2, 8], [5, 3]];
-			game.strikeSpareTracker = ["spare", "no bonus"];
-			game._awardBonusPoints()
-			expect(game.bonusPointsByFrame[0]).toEqual(10)
-		});
-
-		it('award a bonus of double the next frame if a strike', function() {
-			game.frameScores = [[10, 0], [5, 3]];
-			game.strikeSpareTracker = ["strike", "no bonus"];
-			game._awardBonusPoints()
-			expect(game.bonusPointsByFrame[0]).toEqual(16)
-		});
-
-		it('keep a running total score', function() {
-			game.frameScores = [[2, 0], [5, 3], [2, 1]]
-			game.bonusPointsByFrame = [0, 0, 0]
-			game.calculateTotalScore()
-			expect(game.totalGameScore).toEqual(13)
-		});
-		
-		it('keep a running total score including the bonus points', function() {
-			game.frameScores = [[10, 0], [5, 3], [2, 1]]
-			game.bonusPointsByFrame = [16, 0, 0]
-			game.calculateTotalScore()
-			expect(game.totalGameScore).toEqual(37)
-		});
-
-	});
-
-
-	describe('turn/frame should', function() {
-
-		it('know when one roll has been taken', function() {
-			turn.bowlOne(5);
-			expect(turn.scoreByBowl.length).toEqual(1);
-		});
-
-		it('know when both rolls have been taken', function() {
-			turn.bowlOne(2);
-			turn.bowlTwo(2);
-			expect(turn.scoreByBowl.length).toEqual(2);
-		});
-
-		it('have ten pins', function() {
-			expect(turn.pinsStanding).toEqual(10);
-		});
-
-		it('keep a turn/frame score', function() {
-			expect(turn.scoreByBowl).toEqual([]);
-		});
-
-		it('add the number of pins hit in first bowl to the score', function() {
-			turn.bowlOne(5)
-			expect(turn.scoreByBowl).toEqual([5]);
-		});
-
-		it('know when there has been a strike', function() {
-			turn.bowlOne(10)
-			expect(turn._bonus()).toEqual("strike")
-		});
-
-		it('know when there has been a spare', function() {
-			turn.bowlOne(9)
-			turn.bowlTwo(1)
-			expect(turn._bonus()).toEqual("spare")
-		});
-
-		it('reset standing pins only after first roll', function() {
-			turn.bowlOne(9)
-			expect(turn.pinsStanding).toEqual(1)
-		});
-
-		it('not allow a second roll if first is a strike', function() {
-			turn.bowlOne(10)
-			turn.bowlTwo()
-			expect(turn.scoreByBowl).toEqual([10, 0])
-		});
-
-		it('not get confused between a spare and strike', function() {
-			turn.bowlOne(1)
-			turn.bowlTwo(9)
-			expect(turn._bonus()).toEqual("spare")
-		});
-			
-
-		it('the first bowl of a frame', function() {
-			turn.bowlOne(6)
-			turn.bowlTwo(2)
-			expect(turn.scoreByBowl[0]).toEqual(6)
-		});
-
-		it('the second bowl of a frame', function() {
-			turn.bowlOne(6)
-			turn.bowlTwo(2)
-			expect(turn.scoreByBowl[1]).toEqual(2)
-		});
-
-		it('the total score of a frame', function() {
-			turn.bowlOne(6)
-			turn.bowlTwo(2)
-			expect(turn.scoreByBowl).toEqual([6,2])
-		});
-
-		it('append frame scores to game tally', function(){
-			turn.bowlOne(6)
-			turn.bowlTwo(2)
-			turn.recordScore()
-			expect(game.frameScores).toContain([6, 2])
-		});
-
 
 	});
 
