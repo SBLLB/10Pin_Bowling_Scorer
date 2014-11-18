@@ -6,7 +6,7 @@
 
 ###The Objective
 
-Write a program in Javascript that counts and sums the scores of a bowling game. Take into account the following:ß
+Write a program in Javascript that counts and sums the scores of a bowling game. Take into account the following:
 
 + A bowling game consists of 10 frames
 + In every frame the player can throw one or two times, the actual number depending on strikes and spares
