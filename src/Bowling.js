@@ -19,6 +19,10 @@ Game.prototype.calculateTotalScore = function() {
  	this.totalGameScore = this.totalFrameScore + this.totalBonusPoints;
 };
 
+Game.prototype.isTenthFrameBonusBowlOne = function() {
+	return (this._isTenthFrame() && this._isLastBowlAStrikeOrSpare())
+};
+
 // PRIVATE
 
 Game.prototype._awardBonusPoints = function() {
@@ -56,7 +60,12 @@ Game.prototype._addUpBonusPoints = function() {
 };
 
 Game.prototype._isTenthFrame = function() {
-	return (this.frameScores.length === 9)	
+	// return (this.frameScores.length === 9)	
+	return (this.turnsLeft === 0)	
+};
+
+Game.prototype._isLastBowlAStrikeOrSpare = function() {
+	return (this.strikeSpareTracker[this.strikeSpareTracker.length -1] !== "no bonus")
 };
 
 

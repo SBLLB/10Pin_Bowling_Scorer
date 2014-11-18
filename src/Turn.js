@@ -14,15 +14,6 @@ Turn.prototype.bowlTwo = function(pinsDown) {
 	this._scorePinsHit(pinsDown);
 };
 
-Turn.prototype.bonusBowlOne = function(pinsDown) {
-	this._scorePinsHit(pinsDown);
-};
-
-// Turn.prototype.bonusBowlTwo = function(pinsDown) {
-// 	this._scorePinsHit(pinsDown);
-// };
-
-
 Turn.prototype.recordScore = function() {
 	this.game.frameScores.push(this.scoreByBowl)
 	this.game.strikeSpareTracker.push(this._bonus())
@@ -68,6 +59,6 @@ Turn.prototype._noMoreBowlsAllowed = function() {
 };
 
 Turn.prototype._isBonusBowlAllowed = function() {
-	return false
+	return (this.game._isTenthFrame() && this._isStrikeOrSpare()); 
 };
 

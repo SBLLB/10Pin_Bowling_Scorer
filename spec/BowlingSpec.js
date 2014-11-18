@@ -23,6 +23,7 @@ describe('A 10-pin bowling game', function() {
 
 		it('you are playing the tenth frame', function() {
 			game.frameScores = [[1,2], [4,5], [2,4], [10,0], [2,5], [3.6], [3,3], [2,2], [1,8]]
+			game.turnsLeft = 0
 			expect(game._isTenthFrame()).toEqual(true)
 		});
 
