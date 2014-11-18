@@ -1,12 +1,12 @@
 ##10-Pin Bowling Scorer
 
 
-#### Count and sum the scores of a bowling game of one player(in javascript).. Weekend Challenge, Week 5 at Maker's Academy.
+#### Count and sum the scores of a bowling game of one player(in javascript). Weekend Challenge, Week 5 at Maker's Academy.
 
 
 ###The Objective
 
-Describe the general point of the project
+Write a program in Javascript that counts and sums the scores of a bowling game. Take into account the following:ß
 
 + A bowling game consists of 10 frames
 + In every frame the player can throw one or two times, the actual number depending on strikes and spares
