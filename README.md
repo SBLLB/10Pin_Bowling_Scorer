@@ -1,7 +1,7 @@
 ##10-Pin Bowling Scorer
 
 
-#### Count and sum the scores of a bowling game of one player(in javascript). Weekend Challenge, Week 5 at Maker's Academy.
+#### Count and sum the scores of a one-player bowling game in javascript. Weekend Challenge, Week 5 at Makers Academy.
 
 
 ###The Objective
