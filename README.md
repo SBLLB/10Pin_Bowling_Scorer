@@ -27,18 +27,7 @@ Write a program in Javascript that counts and sums the scores of a bowling game.
 
 
 ### To do 
-- [ ] Employ SOLID principles more throughout.  
+- [ ] Finish tenth frame logic
+- [ ] Employ SOLID principles more throughout
   
 
-
-
-
-
-
-A bowling game consists of 10 frames in which the player tries to knock down the 10 pins. In every frame the player can throw one or two times. The actual number depends on strikes and spares. The score of a frame is the number of knocked down pins plus bonuses for strikes and spares. After 
-###10th frame
-
-If the player rolls a strike or spare in the 10th frame he can roll the additional balls for the bonus. But he can never roll more than 3 balls in the 10th frame. The additional rolls only count for the bonus not for the regular frame count.
-
-10, 10, 10 in the 10th frame gives 30 points (10 points for the regular first strike and 20 points for the bonus)
-1, 9, 10 in the 10th frame gives 20 points (10 points for the regular spare and 10 points for the bonus)
