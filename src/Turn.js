@@ -17,7 +17,7 @@ Turn.prototype.bowlTwo = function(pinsDown) {
 
 Turn.prototype.recordScore = function() {
 	this.game.frameScores.push(this.scoreByBowl)
-	this.game.strikeSpareTracker.push(this._bonus())
+	this.game.bonusPointsByFrame.push(this.bonusPoints)
 };
 
 Turn.prototype.recordBonusPoints = function() {
@@ -31,8 +31,6 @@ Turn.prototype.recordBonusPoints = function() {
 		this.bonusPoints = 0
 	}
 };
-
-
 
 
 // PRIVATE
@@ -50,16 +48,6 @@ Turn.prototype._nextFrameBothBowls = function() {
 	i = this._nextFrameNumber();
 	return this.game.turns[i].score	
 };
-
-// Turn.prototype._bonus = function() {
-// 	if (this._isStrikeOrSpare()) {
-// 		if (this._isStrike()) {
-// 			return "strike" 
-// 		}
-// 		else return "spare"
-// 	}
-// 	else return "no bonus" 
-// };
 
 Turn.prototype._isStrikeOrSpare = function() {
 	return (this.score  === 10)
@@ -91,7 +79,4 @@ Turn.prototype._noMoreBowlsAllowed = function() {
 	return (this.scoreByBowl.length >= 2)
 };
 
-Turn.prototype._isBonusBowlAllowed = function() {
-	return (this.game._isTenthFrame() && this._isStrikeOrSpare()); 
-};
 
