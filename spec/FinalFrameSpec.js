@@ -23,13 +23,35 @@ describe('Tenth Frame: ', function() {
 		});
 	});
 
-	describe('if strike or spare in final frame a bonus bowl should be awarded', function() {
+	describe('a bonus bowl should be allowed', function() {
 		
 		it('if the tenth frame yielded a strike', function() {
 			turn10.score = 10
 			turn10.scoreByFrame = [10,0]
-			expect(turn10._isBonusBowl()).toEqual(true)
+			expect(turn10._isBonusBowlAllowed()).toEqual(true)
+		});
+
+		it('if the tenth frame yielded a spare', function() {
+			turn10.score = 10
+			turn10.scoreByFrame = [3,3]
+			expect(turn10._isBonusBowlAllowed()).toEqual(true)
 		});
 	});
+
+	describe ('when a final frame is a strike or spare', function() {
+		it('a bonus bowl should be created ', function() {
+			turn10.score = 10
+			turn10.activateFinalFrameBonus()
+			expect(finalFrameBonus.turn).toEqual(turn10)
+		})
+	})
+
+		describe ('when a final frame is NOT a strike or spare', function() {
+		it('a bonus bowl should not be created ', function() {
+			turn10.score = 8
+			expect(turn10.activateFinalFrameBonus()).toEqual('No bonus allowed. End of game.')
+			// expect(finalFrameBonus.turn).toEqual()
+		})
+	})
 
 });

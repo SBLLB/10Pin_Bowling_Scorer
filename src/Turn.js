@@ -30,6 +30,13 @@ Turn.prototype.recordBonusPoints = function() {
 	}
 };
 
+Turn.prototype.activateFinalFrameBonus = function(first_argument) {
+	if (this._isBonusBowlAllowed()) {
+		finalFrameBonus = new FinalFrameBonus(this)
+	}
+	else 
+		return "No bonus allowed. End of game."
+};
 
 
 
@@ -101,7 +108,7 @@ Turn.prototype._isFinalFrame = function() {
 	return (this === turn10)
 };
 
-Turn.prototype._isBonusBowl = function() {
+Turn.prototype._isBonusBowlAllowed = function() {
 	return (this._isFinalFrame() && this._isStrikeOrSpare()) 
 };
 
