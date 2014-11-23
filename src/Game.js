@@ -1,16 +1,16 @@
 Game = function() {
-	this.turnsLeft = 10;
-	// Need Turns left? Use this.frameScores.length instead?
 	this.totalGameScore = 0;
 	this.frameScores = [];
-	this.bonusPointsByFrame = [];
-	this.strikeSpareTracker = [];
+
 	this.flattenedFrameScore =[];
 	this.totalFrameScore = 0;
 	this.totalBonusPoints = 0;
+
+	// this.bonusPointsByFrame = [];
+	// this.strikeSpareTracker = [];
+	this.turnsLeft = 10;
+
 };
-
-
 
 Game.prototype.calculateTotalScore = function() {
 	this._flattenFrameScoresArray();
@@ -19,9 +19,9 @@ Game.prototype.calculateTotalScore = function() {
  	this.totalGameScore = this.totalFrameScore + this.totalBonusPoints;
 };
 
-Game.prototype.isTenthFrameBonusBowlOne = function() {
-	return (this._isTenthFrame() && this._isLastBowlAStrikeOrSpare())
-};
+// Game.prototype.isTenthFrameBonusBowlOne = function() {
+// 	return (this._isTenthFrame() && this._isLastBowlAStrikeOrSpare())
+// };
 
 // PRIVATE
 
@@ -32,10 +32,12 @@ Game.prototype._awardBonusPoints = function() {
     	if ((a[index]) === "no bonus") {
     		this.bonusPointsByFrame.push(0)
     	}
-    	if ((a[index]) === "spare") {
+    	else if ((a[index]) === "spare") {
     		this.bonusPointsByFrame.push(((this.frameScores[(index+1)][0])*2))
     	}
-    	if ((a[index]) === "strike") {
+    	else 
+    		// ((a[index]) === "strike") 
+    	{
     		this.bonusPointsByFrame.push(((this.frameScores[(index+1)][0])+(this.frameScores[(index+1)][1]))*2)
     	};
 	};
@@ -65,7 +67,7 @@ Game.prototype._isTenthFrame = function() {
 };
 
 Game.prototype._isLastBowlAStrikeOrSpare = function() {
-	return (this.strikeSpareTracker[this.strikeSpareTracker.length -1] !== "no bonus")
+	return (this.strikeSpareTracker[-1] !== "no bonus")
 };
 
 
