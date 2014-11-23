@@ -27,9 +27,9 @@ Turn.prototype.recordBonusPoints = function() {
 	else if (this._isSpare()) {
 		this.bonusPoints = this._nextFrameFirstBowl() * 2
 	}
-	// else {
-	// 	this.bonusPoints = 0
-	// }
+	else {
+		this.bonusPoints = 0
+	}
 };
 
 

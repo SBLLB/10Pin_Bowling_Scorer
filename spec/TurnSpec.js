@@ -78,6 +78,14 @@ describe('A turn in a 10-pin bowling game', function() {
 			expect(turn1.bonusPoints).toEqual(6);
 		});
 
+		it('a zero value for bonus points if no strike or spare ', function() {
+			turn1.bowlOne(1);
+			turn1.bowlTwo(2);
+			turn2.scoreByBowl = [3, 2]
+			turn1.recordBonusPoints();
+			expect(turn1.bonusPoints).toEqual(0);
+		});
+
 	});
 
 	describe('could be a strike or spare', function() {
