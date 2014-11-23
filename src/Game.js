@@ -23,8 +23,6 @@ Game.prototype.calculateTotalScore = function() {
  	this.totalGameScore = this.totalFrameScore + this.totalBonusPoints;
 };
 
-
-
 // PRIVATE
 
 
@@ -50,9 +48,6 @@ Game.prototype._isTenthFrame = function() {
 	return (this.turnsLeft === 0)	
 };
 
-Game.prototype._isLastBowlAStrikeOrSpare = function() {
-	return (this.strikeSpareTracker[-1] !== "no bonus")
-};
 
 
 

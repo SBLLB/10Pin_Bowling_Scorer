@@ -16,8 +16,8 @@ Turn.prototype.bowlTwo = function(pinsDown) {
 };
 
 Turn.prototype.recordScore = function() {
-	this._recordFrameScoreToGame();
-	this._recordBonusScoreToGame();
+	this._sendFrameScoreToGame();
+	this._sendBonusScoreToGame();
 	
 };
 
@@ -29,6 +29,8 @@ Turn.prototype.recordBonusPoints = function() {
 		this._awardDoubleFirstBowlOfNextFrame();
 	}
 };
+
+
 
 
 // PRIVATE
@@ -45,11 +47,11 @@ Turn.prototype._scorePinsHit = function(pinsDown) {
 	this.pinsStanding -= pinsDown;
 };
 
-Turn.prototype._recordFrameScoreToGame = function() {
+Turn.prototype._sendFrameScoreToGame = function() {
 	this.game.frameScores.push(this.scoreByBowl)
 };
 
-Turn.prototype._recordBonusScoreToGame = function() {
+Turn.prototype._sendBonusScoreToGame = function() {
 	this.game.frameBonusPoints.push(this.bonusPoints)
 };
 
@@ -95,4 +97,11 @@ Turn.prototype._awardDoubleFirstBowlOfNextFrame = function() {
 	this.bonusPoints = this._nextFrameFirstBowl() * 2.
 };
 
+Turn.prototype._isFinalFrame = function() {
+	return (this === turn10)
+};
+
+Turn.prototype._isBonusBowl = function() {
+	return (this._isFinalFrame() && this._isStrikeOrSpare()) 
+};
 
