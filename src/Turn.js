@@ -1,8 +1,9 @@
 
-Turn = function() {
+Turn = function(game) {
 	this.pinsStanding = 10;
 	this.score = 0;
 	this.scoreByBowl = [];
+	this.bonusPoints = 0
 	this.game = game;
 }; 
 
@@ -19,19 +20,46 @@ Turn.prototype.recordScore = function() {
 	this.game.strikeSpareTracker.push(this._bonus())
 };
 
+Turn.prototype.recordBonusPoints = function() {
+	if (this._isStrike()) {
+		this.bonusPoints = this._nextFrameBothBowls() * 2
+	} 
+	// else if (this._isSpare()) {
+
+	// }
+	// else {
+	// 	this.bonusPoints = 0
+	// }
+};
+
+
+
 
 // PRIVATE
 
-
-Turn.prototype._bonus = function() {
-	if (this._isStrikeOrSpare()) {
-		if (this._isStrike()) {
-			return "strike" 
-		}
-		else return "spare"
-	}
-	else return "no bonus" 
+Turn.prototype._nextFrameNumber = function() {
+	return (this.game.turns.indexOf(this) + 1)
 };
+
+Turn.prototype._nextFrameFirstBowl = function() {
+	i = this._nextFrameNumber();
+	return this.game.turns[i].scoreByBowl[0]	
+};
+
+Turn.prototype._nextFrameBothBowls = function() {
+	i = this._nextFrameNumber();
+	return this.game.turns[i].score	
+};
+
+// Turn.prototype._bonus = function() {
+// 	if (this._isStrikeOrSpare()) {
+// 		if (this._isStrike()) {
+// 			return "strike" 
+// 		}
+// 		else return "spare"
+// 	}
+// 	else return "no bonus" 
+// };
 
 Turn.prototype._isStrikeOrSpare = function() {
 	return (this.score  === 10)
@@ -40,6 +68,10 @@ Turn.prototype._isStrikeOrSpare = function() {
 Turn.prototype._isStrike = function() {
 	return (this.scoreByBowl[0] === 10)
 };
+
+Turn.prototype._isSpare = function () {
+	return (this._isStrikeOrSpare() && !this._isStrike());
+}
 
 Turn.prototype._scorePinsHit = function(pinsDown) {
 	if (this._isStrike()) {

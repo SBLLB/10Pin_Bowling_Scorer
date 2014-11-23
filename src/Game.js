@@ -1,15 +1,24 @@
 Game = function() {
 	this.totalGameScore = 0;
 	this.frameScores = [];
-
 	this.flattenedFrameScore =[];
 	this.totalFrameScore = 0;
 	this.totalBonusPoints = 0;
-
-	// this.bonusPointsByFrame = [];
-	// this.strikeSpareTracker = [];
+	this.bonusPointsByFrame = [];
+	this.strikeSpareTracker = [];
 	this.turnsLeft = 10;
 
+	this.turns = [
+		turn1 	= new Turn(this),
+		turn2 	= new Turn(this),
+		turn3 	= new Turn(this),
+		turn4 	= new Turn(this),
+		turn5 	= new Turn(this),
+		turn6 	= new Turn(this),
+		turn7 	= new Turn(this),
+		turn8 	= new Turn(this),
+		turn9 	= new Turn(this)
+	]
 };
 
 Game.prototype.calculateTotalScore = function() {

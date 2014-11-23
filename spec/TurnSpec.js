@@ -3,20 +3,21 @@ describe('A turn in a 10-pin bowling game', function() {
 
 	beforeEach(function() {
 			game = new Game;
-			turn = new Turn(game);
+			// turn = new Turn(game);
+			// turn2 = new Turn(game);
 		});
 
 	describe('has bowling pins.', function() {
 
 
 		it('there should be ten pins when a turns initialised', function() {
-			expect(turn.pinsStanding).toEqual(10);
+			expect(turn1.pinsStanding).toEqual(10);
 		});
 
 
 		it('it should know how many pins are standing after the 1st roll', function() {
-			turn.bowlOne(9)
-			expect(turn.pinsStanding).toEqual(1)
+			turn1.bowlOne(9)
+			expect(turn1.pinsStanding).toEqual(1)
 		});
 
 	});	
@@ -25,20 +26,20 @@ describe('A turn in a 10-pin bowling game', function() {
 
 
 		it('it should know when one bowl has been taken', function() {
-			turn.bowlOne(5);
-			expect(turn.scoreByBowl.length).toEqual(1);
+			turn1.bowlOne(5);
+			expect(turn1.scoreByBowl.length).toEqual(1);
 		});
 
 		it('it should know when both bowls have been taken', function() {
-			turn.bowlOne(2);
-			turn.bowlTwo(2);
-			expect(turn.scoreByBowl.length).toEqual(2);
+			turn1.bowlOne(2);
+			turn1.bowlTwo(2);
+			expect(turn1.scoreByBowl.length).toEqual(2);
 		});
 
 		it('and will not allow more than two bowls to be taken', function() {
-			turn.bowlOne(2);
-			turn.bowlTwo(2);
-			expect(turn.bowlTwo(3)).toEqual(undefined)
+			turn1.bowlOne(2);
+			turn1.bowlTwo(2);
+			expect(turn1.bowlTwo(3)).toEqual(undefined)
 		});
 
 
@@ -47,19 +48,35 @@ describe('A turn in a 10-pin bowling game', function() {
 	describe('should keep a score of', function() {
 
 		it('the overall score for the turn/frame', function() {
-			expect(turn.scoreByBowl).toEqual([]);
+			expect(turn1.scoreByBowl).toEqual([]);
 		});
 
 		it('the number of pins hit in first bowl', function() {
-			turn.bowlOne(5)
-			expect(turn.scoreByBowl).toEqual([5]);
+			turn1.bowlOne(5)
+			expect(turn1.scoreByBowl).toEqual([5]);
 		});
 
 		it('the number of pins hit in the second bowl', function() {
-			turn.bowlOne(5)
-			turn.bowlTwo(2)
-			expect(turn.scoreByBowl).toEqual([5,2]);
+			turn1.bowlOne(5)
+			turn1.bowlTwo(2)
+			expect(turn1.scoreByBowl).toEqual([5,2]);
 		});
+
+		it('the bonus points for a strike', function() {
+			turn1.bowlOne(10);
+			turn1.bowlTwo(0);
+			turn2.score = 6
+			turn1.recordBonusPoints();
+			expect(turn1.bonusPoints).toEqual(12);
+		});
+
+		// it('the bonus points for a spare', function() {
+		// 	turn1.bowlOne(1);
+		// 	turn1.bowlTwo(9);
+		// 	turn2.scoreByBowl = [3, 2]
+		// 	turn1.recordBonusPoints();
+		// 	expect(turn1.bonusPoints).toEqual(6);
+		// });
 
 	});
 
@@ -67,27 +84,27 @@ describe('A turn in a 10-pin bowling game', function() {
 
 
 		it('it should know when there has been a strike', function() {
-			turn.bowlOne(10)
-			expect(turn._bonus()).toEqual("strike")
+			turn1.bowlOne(10)
+			expect(turn1._bonus()).toEqual("strike")
 		});
 
 		it('it should know when there has been a spare', function() {
-			turn.bowlOne(9)
-			turn.bowlTwo(1)
-			expect(turn._bonus()).toEqual("spare")
+			turn1.bowlOne(9)
+			turn1.bowlTwo(1)
+			expect(turn1._bonus()).toEqual("spare")
 		});
 
 
 		it('it should not allow a second roll if first is a strike', function() {
-			turn.bowlOne(10)
-			turn.bowlTwo()
+			turn1.bowlOne(10)
+			turn1.bowlTwo()
 			expect(turn.scoreByBowl).toEqual([10, 0])
 		});
 
 		it('it should not get confused between a spare and strike', function() {
-			turn.bowlOne(1)
-			turn.bowlTwo(9)
-			expect(turn._bonus()).toEqual("spare")
+			turn1.bowlOne(1)
+			turn1.bowlTwo(9)
+			expect(turn1._bonus()).toEqual("spare")
 		});
 		
 	});	
