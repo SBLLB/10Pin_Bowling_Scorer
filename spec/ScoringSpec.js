@@ -9,14 +9,14 @@ describe('To score a game of ten pin bowling', function() {
 
 		it('a running total score', function() {
 			game.frameScores = [[2, 0], [5, 3], [2, 1]]
-			game.bonusPointsByFrame = [0, 0, 0]
+			game.frameBonusPoints = [0, 0, 0]
 			game.calculateTotalScore()
 			expect(game.totalGameScore).toEqual(13)
 		});
 		
 		it('a running total score including the bonus points', function() {
 			game.frameScores = [[10, 0], [5, 3], [2, 1]]
-			game.bonusPointsByFrame = [16, 0, 0]
+			game.frameBonusPoints = [16, 0, 0]
 			game.calculateTotalScore()
 			expect(game.totalGameScore).toEqual(37)
 		});
@@ -58,7 +58,7 @@ describe('To score a game of ten pin bowling', function() {
 			turn1.bowlTwo(4);
 			turn1.bonusPoints = 4;
 			turn1.recordScore();
-			expect(game.bonusPointsByFrame).toContain(4)
+			expect(game.frameBonusPoints).toContain(4)
 		});
 		
 	});

@@ -17,7 +17,7 @@ Turn.prototype.bowlTwo = function(pinsDown) {
 
 Turn.prototype.recordScore = function() {
 	this.game.frameScores.push(this.scoreByBowl)
-	this.game.bonusPointsByFrame.push(this.bonusPoints)
+	this.game.frameBonusPoints.push(this.bonusPoints)
 };
 
 Turn.prototype.recordBonusPoints = function() {
