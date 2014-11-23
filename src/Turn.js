@@ -23,10 +23,10 @@ Turn.prototype.recordScore = function() {
 
 Turn.prototype.recordBonusPoints = function() {
 	if (this._isStrike()) {
-		this._awardDoubleNextFrame();
+		this._awardBonusOfNextFrame();
 	} 
 	if (this._isSpare()) {
-		this._awardDoubleFirstBowlOfNextFrame();
+		this._awardBonusOfFirstBowlOfNextFrame();
 	}
 };
 
@@ -96,16 +96,16 @@ Turn.prototype._recordZeroForSecondBowl = function() {
 	this.scoreByBowl.push(0)
 };
 
-Turn.prototype._awardDoubleNextFrame = function() {
+Turn.prototype._awardBonusOfNextFrame = function() {
 	if (this._isFinalFrame()) {
-		this.bonusPoints = this.finalFrameBonus.bonusBowlOneScore
+		this.bonusPoints = this._bothBonusBowlsScore()
 	}
-	this.bonusPoints = this._nextFrameBothBowls() 
+	else this.bonusPoints = this._nextFrameBothBowls() 
 };
 
-Turn.prototype._awardDoubleFirstBowlOfNextFrame = function() {
+Turn.prototype._awardBonusOfFirstBowlOfNextFrame = function() {
 	if (this._isFinalFrame()) {
-		this.bonusPoints = finalFrameBonus.bonusBowlscoreByBowl[0]
+		this.bonusPoints = this._firstBonusBowlScore()
 	}
 	else this.bonusPoints = this._nextFrameFirstBowl()
 };
@@ -116,5 +116,13 @@ Turn.prototype._isFinalFrame = function() {
 
 Turn.prototype._isBonusBowlAllowed = function() {
 	return (this._isFinalFrame() && this._isStrikeOrSpare()) 
+};
+
+Turn.prototype._firstBonusBowlScore = function() {
+	return finalFrameBonus.bonusBowlScoreByBowl[0]
+};
+
+Turn.prototype._bothBonusBowlsScore = function() {
+	return finalFrameBonus.totalBonusScore;
 };
 
