@@ -3,8 +3,6 @@ describe('A turn in a 10-pin bowling game', function() {
 
 	beforeEach(function() {
 			game = new Game;
-			// turn = new Turn(game);
-			// turn2 = new Turn(game);
 		});
 
 	describe('has bowling pins.', function() {
@@ -93,26 +91,32 @@ describe('A turn in a 10-pin bowling game', function() {
 
 		it('it should know when there has been a strike', function() {
 			turn1.bowlOne(10)
-			expect(turn1._bonus()).toEqual("strike")
+			expect(turn1._isStrike()).toEqual(true)
 		});
 
 		it('it should know when there has been a spare', function() {
 			turn1.bowlOne(9)
 			turn1.bowlTwo(1)
-			expect(turn1._bonus()).toEqual("spare")
+			expect(turn1._isSpare()).toEqual(true)
 		});
 
 
 		it('it should not allow a second roll if first is a strike', function() {
 			turn1.bowlOne(10)
 			turn1.bowlTwo()
-			expect(turn.scoreByBowl).toEqual([10, 0])
+			expect(turn1.scoreByBowl).toEqual([10, 0])
 		});
 
-		it('it should not get confused between a spare and strike', function() {
+		it('it should not confuse a spare with a strike', function() {
 			turn1.bowlOne(1)
 			turn1.bowlTwo(9)
-			expect(turn1._bonus()).toEqual("spare")
+			expect(turn1._isStrike()).toEqual(false)
+		});
+
+		it('it should not confuse a strike with a spare', function() {
+			turn1.bowlOne(10)
+			turn1.bowlTwo(0)
+			expect(turn1._isSpare()).toEqual(false)
 		});
 		
 	});	

@@ -34,23 +34,23 @@ Game.prototype.calculateTotalScore = function() {
 
 // PRIVATE
 
-Game.prototype._awardBonusPoints = function() {
-	var index;
-	var a = this.strikeSpareTracker;
-	for (index = 0; index < a.length; ++index) {
-    	if ((a[index]) === "no bonus") {
-    		this.bonusPointsByFrame.push(0)
-    	}
-    	else if ((a[index]) === "spare") {
-    		this.bonusPointsByFrame.push(((this.frameScores[(index+1)][0])*2))
-    	}
-    	else 
-    		// ((a[index]) === "strike") 
-    	{
-    		this.bonusPointsByFrame.push(((this.frameScores[(index+1)][0])+(this.frameScores[(index+1)][1]))*2)
-    	};
-	};
-};
+// Game.prototype._awardBonusPoints = function() {
+// 	var index;
+// 	var a = this.strikeSpareTracker;
+// 	for (index = 0; index < a.length; ++index) {
+//     	if ((a[index]) === "no bonus") {
+//     		this.bonusPointsByFrame.push(0)
+//     	}
+//     	else if ((a[index]) === "spare") {
+//     		this.bonusPointsByFrame.push(((this.frameScores[(index+1)][0])*2))
+//     	}
+//     	else 
+//     		// ((a[index]) === "strike") 
+//     	{
+//     		this.bonusPointsByFrame.push(((this.frameScores[(index+1)][0])+(this.frameScores[(index+1)][1]))*2)
+//     	};
+// 	};
+// };
 
 Game.prototype._flattenFrameScoresArray = function() {
 	this.flattenedFrameScore = this.frameScores.reduce(function(a, b) {

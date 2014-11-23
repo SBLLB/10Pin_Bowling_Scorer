@@ -76,6 +76,7 @@ Turn.prototype._isSpare = function () {
 Turn.prototype._scorePinsHit = function(pinsDown) {
 	if (this._isStrike()) {
 		this.scoreByBowl.push(0)
+		// awardZeroForSecondBowl
 	}
 	if (this._noMoreBowlsAllowed()) {
 		return undefined

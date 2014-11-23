@@ -5,23 +5,23 @@ describe('To score a game of ten pin bowling', function() {
 		turn = new Turn(game);
 	});
 
-	describe('the Game should calculate bonus points', function() {
+	// describe('the Game should calculate bonus points', function() {
 
-		it('awarding a bonus of double the next bowl if a spare', function() {
-			game.frameScores = [[2, 8], [5, 3]];
-			game.strikeSpareTracker = ["spare", "no bonus"];
-			game._awardBonusPoints()
-			expect(game.bonusPointsByFrame[0]).toEqual(10)
-		});
+	// 	it('awarding a bonus of double the next bowl if a spare', function() {
+	// 		game.frameScores = [[2, 8], [5, 3]];
+	// 		game.strikeSpareTracker = ["spare", "no bonus"];
+	// 		game._awardBonusPoints()
+	// 		expect(game.bonusPointsByFrame[0]).toEqual(10)
+	// 	});
 
-		it('awarding a bonus of double the next frame if a strike', function() {
-			game.frameScores = [[10, 0], [5, 3]];
-			game.strikeSpareTracker = ["strike", "no bonus"];
-			game._awardBonusPoints()
-			expect(game.bonusPointsByFrame[0]).toEqual(16)
-		});
+	// 	it('awarding a bonus of double the next frame if a strike', function() {
+	// 		game.frameScores = [[10, 0], [5, 3]];
+	// 		game.strikeSpareTracker = ["strike", "no bonus"];
+	// 		game._awardBonusPoints()
+	// 		expect(game.bonusPointsByFrame[0]).toEqual(16)
+	// 	});
 
-	});
+	// });
 
 	describe('the Game should keep', function() {
 
