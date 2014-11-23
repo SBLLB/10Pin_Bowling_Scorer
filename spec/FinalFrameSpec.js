@@ -39,10 +39,20 @@ describe('Tenth Frame: ', function() {
 	});
 
 	describe ('when a final frame is a strike or spare', function() {
+
 		it('a bonus bowl should be created ', function() {
 			turn10.score = 10
 			turn10.activateFinalFrameBonus()
 			expect(finalFrameBonus.turn).toEqual(turn10)
+		})
+
+		it('the points of the bonus bowl should be awarded to the 10th frame', function() {
+			turn10.score = 10
+			turn10.scoreByBowl = [2,8]
+			turn10.activateFinalFrameBonus()		
+			finalFrameBonus.bonusBowlOne(5)
+			turn10.recordBonusPoints()
+			expect(turn10.bonusPoints).toEqual(5)
 		})
 	})
 
@@ -50,7 +60,6 @@ describe('Tenth Frame: ', function() {
 		it('a bonus bowl should not be created ', function() {
 			turn10.score = 8
 			expect(turn10.activateFinalFrameBonus()).toEqual('No bonus allowed. End of game.')
-			// expect(finalFrameBonus.turn).toEqual()
 		})
 	})
 

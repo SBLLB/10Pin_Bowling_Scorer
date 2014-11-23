@@ -97,11 +97,17 @@ Turn.prototype._recordZeroForSecondBowl = function() {
 };
 
 Turn.prototype._awardDoubleNextFrame = function() {
-	this.bonusPoints = this._nextFrameBothBowls() * 2
+	if (this._isFinalFrame()) {
+		this.bonusPoints = this.finalFrameBonus.bonusBowlOneScore
+	}
+	this.bonusPoints = this._nextFrameBothBowls() 
 };
 
 Turn.prototype._awardDoubleFirstBowlOfNextFrame = function() {
-	this.bonusPoints = this._nextFrameFirstBowl() * 2.
+	if (this._isFinalFrame()) {
+		this.bonusPoints = finalFrameBonus.bonusBowlscoreByBowl[0]
+	}
+	else this.bonusPoints = this._nextFrameFirstBowl()
 };
 
 Turn.prototype._isFinalFrame = function() {

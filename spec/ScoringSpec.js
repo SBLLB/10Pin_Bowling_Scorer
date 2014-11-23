@@ -16,9 +16,9 @@ describe('To score a game of ten pin bowling', function() {
 		
 		it('a running total score including the bonus points', function() {
 			game.frameScores = [[10, 0], [5, 3], [2, 1]]
-			game.frameBonusPoints = [16, 0, 0]
+			game.frameBonusPoints = [8, 0, 0]
 			game.calculateTotalScore()
-			expect(game.totalGameScore).toEqual(37)
+			expect(game.totalGameScore).toEqual(29)
 		});
 	});
 
