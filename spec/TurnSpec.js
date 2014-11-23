@@ -70,13 +70,13 @@ describe('A turn in a 10-pin bowling game', function() {
 			expect(turn1.bonusPoints).toEqual(12);
 		});
 
-		// it('the bonus points for a spare', function() {
-		// 	turn1.bowlOne(1);
-		// 	turn1.bowlTwo(9);
-		// 	turn2.scoreByBowl = [3, 2]
-		// 	turn1.recordBonusPoints();
-		// 	expect(turn1.bonusPoints).toEqual(6);
-		// });
+		it('the bonus points for a spare', function() {
+			turn1.bowlOne(1);
+			turn1.bowlTwo(9);
+			turn2.scoreByBowl = [3, 2]
+			turn1.recordBonusPoints();
+			expect(turn1.bonusPoints).toEqual(6);
+		});
 
 	});
 
