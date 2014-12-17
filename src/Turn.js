@@ -5,6 +5,7 @@ Turn = function(game) {
 	this.scoreByBowl = [];
 	this.bonusPoints = 0
 	this.game = game;
+	this.whatFrame = this;
 }; 
 
 Turn.prototype.bowlOne = function(pinsDown) {
@@ -23,10 +24,10 @@ Turn.prototype.recordScore = function() {
 
 Turn.prototype.recordBonusPoints = function() {
 	if (this._isStrike()) {
-		this._awardBonusOfNextFrame();
+		this._awardBonusOfNextTwoBowls();
 	} 
 	if (this._isSpare()) {
-		this._awardBonusOfFirstBowlOfNextFrame();
+		this._awardBonusOfNextBowl();
 	}
 };
 
@@ -83,9 +84,18 @@ Turn.prototype._nextFrameFirstBowl = function() {
 	return this.game.turns[i].scoreByBowl[0]	
 };
 
-Turn.prototype._nextFrameBothBowls = function() {
-	i = this._nextFrameNumber();
-	return this.game.turns[i].score	
+Turn.prototype._nextTwoBowls = function() {
+	f1 = this._nextFrameNumber();
+	f2 = this._nextFrameNumber() + 1;
+	if (this.game.turns[f1]._isStrike()) {
+		if(this.game.turns[f1].whatFrame === turn10) {
+			return this.game.turns[f1].score + finalFrameBonus.bonusBowlScoreByBowl[0]
+		}
+		else {
+			return this.game.turns[f1].score + this.game.turns[f2].scoreByBowl[0];
+		}
+	}
+	else return this.game.turns[f1].score	
 };
 
 Turn.prototype._noMoreBowlsAllowed = function() {
@@ -96,14 +106,14 @@ Turn.prototype._recordZeroForSecondBowl = function() {
 	this.scoreByBowl.push(0)
 };
 
-Turn.prototype._awardBonusOfNextFrame = function() {
+Turn.prototype._awardBonusOfNextTwoBowls = function() {
 	if (this._isFinalFrame()) {
 		this.bonusPoints = this._BonusBowlScore()
 	}
-	else this.bonusPoints = this._nextFrameBothBowls() 
+	else this.bonusPoints = this._nextTwoBowls() 
 };
 
-Turn.prototype._awardBonusOfFirstBowlOfNextFrame = function() {
+Turn.prototype._awardBonusOfNextBowl = function() {
 	if (this._isFinalFrame()) {
 		this.bonusPoints = this._BonusBowlScore()
 	}

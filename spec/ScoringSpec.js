@@ -63,4 +63,47 @@ describe('To score a game of ten pin bowling', function() {
 		
 	});
 
+	describe('should be able to calculate', function() {
+		it('a perfect game', function() {
+			turn1.bowlOne(10)
+			turn2.bowlOne(10)
+			turn3.bowlOne(10)
+			turn4.bowlOne(10)
+			turn5.bowlOne(10)
+			turn6.bowlOne(10)
+			turn7.bowlOne(10)
+			turn8.bowlOne(10)
+			turn9.bowlOne(10)
+			turn10.bowlOne(10)
+			turn10.activateFinalFrameBonus()
+			finalFrameBonus.bonusBowlOne(10)
+			finalFrameBonus.bonusBowlTwo(10)
+
+			turn1.recordBonusPoints()
+			turn1.recordScore();
+			turn2.recordBonusPoints()
+			turn2.recordScore();
+			turn3.recordBonusPoints()
+			turn3.recordScore();
+			turn4.recordBonusPoints()
+			turn4.recordScore();
+			turn5.recordBonusPoints()
+			turn5.recordScore();
+			turn6.recordBonusPoints()
+			turn6.recordScore();
+			turn7.recordBonusPoints()
+			turn7.recordScore();
+			turn8.recordBonusPoints()
+			turn8.recordScore();
+			turn9.recordBonusPoints()
+			turn9.recordScore();
+			turn10.recordBonusPoints()
+			turn10.recordScore();
+
+			game.calculateTotalScore();
+			expect(game.totalGameScore).toEqual(300);
+
+		});
+	});
+
 });
