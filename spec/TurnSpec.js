@@ -84,6 +84,16 @@ describe('A turn in a 10-pin bowling game', function() {
 			expect(turn1.bonusPoints).toEqual(0);
 		});
 
+		it('the bonus points if there is a spare in final frame', function() {
+			turn10.scoreByBowl = [5,5];
+			turn10.score = 10;
+			turn10.activateFinalFrameBonus();
+			finalFrameBonus.totalBonusScore = 15;
+			turn10.recordBonusPoints();
+			expect(turn10.bonusPoints).toEqual(15);
+
+		});
+
 	});
 
 	describe('could be a strike or spare', function() {
