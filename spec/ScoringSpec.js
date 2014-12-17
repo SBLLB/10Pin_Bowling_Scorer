@@ -102,6 +102,53 @@ describe('To score a game of ten pin bowling', function() {
 
 			game.calculateTotalScore();
 			expect(game.totalGameScore).toEqual(300);
+		});
+
+		it('a gutter game', function() {
+			turn1.bowlOne(0);
+			turn1.bowlTwo(0);
+			turn2.bowlOne(0);
+			turn2.bowlTwo(0);
+			turn3.bowlOne(0);
+			turn3.bowlTwo(0);
+			turn4.bowlOne(0);
+			turn4.bowlTwo(0);
+			turn5.bowlOne(0);
+			turn5.bowlTwo(0);
+			turn6.bowlOne(0);
+			turn6.bowlTwo(0);
+			turn7.bowlOne(0);
+			turn7.bowlTwo(0);
+			turn8.bowlOne(0);
+			turn8.bowlTwo(0);
+			turn9.bowlOne(0);
+			turn9.bowlTwo(0);
+			turn10.bowlOne(0);
+			turn10.bowlTwo(0);
+
+			turn1.recordBonusPoints()
+			turn1.recordScore();
+			turn2.recordBonusPoints()
+			turn2.recordScore();
+			turn3.recordBonusPoints()
+			turn3.recordScore();
+			turn4.recordBonusPoints()
+			turn4.recordScore();
+			turn5.recordBonusPoints()
+			turn5.recordScore();
+			turn6.recordBonusPoints()
+			turn6.recordScore();
+			turn7.recordBonusPoints()
+			turn7.recordScore();
+			turn8.recordBonusPoints()
+			turn8.recordScore();
+			turn9.recordBonusPoints()
+			turn9.recordScore();
+			turn10.recordBonusPoints()
+			turn10.recordScore();
+
+			game.calculateTotalScore();
+			expect(game.totalGameScore).toEqual(0);
 
 		});
 	});
